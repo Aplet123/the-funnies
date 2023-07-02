@@ -38,8 +38,6 @@ int main(void) {
     for (int i = 0; i < bound; i ++) {
         ptrs[i] = mmap(i == 0 ? NULL : ptrs[i - 1] + 0x1000, 0x1000, PROT_EXEC | PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
     }
-    char* ptr = mmap(NULL, 0x10000, PROT_EXEC | PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
-    void (*orig)() = (void(*)()) ptr;
     // the 0x50 is just there for stack alignment don't bully me
     char header[23] = {0x55, 0x53, 0x50, 0x48, 0xbb, 0, 0, 0, 0, 0, 0, 0, 0, 0x48, 0xbd, 0, 0, 0, 0, 0, 0, 0, 0};
     *(size_t*)(header + 5) = (size_t) &stuff;

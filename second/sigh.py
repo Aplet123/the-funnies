@@ -34,7 +34,7 @@ def p_setattr(prop, val):
 def p_getattr(val, prop):
     return p_imp("pickle", "io") + p_setattr("whatagarbage", val) + pickle.POP + p_imp("io", "whatagarbage." + prop)
 
-header = pickle.PROTO + bytes([4]) + pickle.MARK
+header = pickle.PROTO + bytes([4])
 footer = b""
 
 footer += pickle.TUPLE2
@@ -98,6 +98,7 @@ footer += pickle.POP
 # print distance as an int
 footer += p_memo(4) + p_int(1) + pickle.TUPLE2 + pickle.REDUCE
 footer += pickle.TUPLE1 + pickle.REDUCE
+footer += pickle.TUPLE1 + pickle.REDUCE
 
 footer += pickle.STOP
 
@@ -112,7 +113,7 @@ def solve_graph(graph):
     data += pickle.DICT
     data += p_int(len(graph))
     data += p_int(len(graph[0]))
-    print(pickle.loads(header + data + footer))
+    pickle.loads(header + data + footer)
 
 if __name__ == "__main__":
     graph = [
@@ -122,4 +123,4 @@ if __name__ == "__main__":
         [35, -1, 12, 0]
     ]
     # graph = [[0, 8, 10, 5, 8, 6, 7, 7, 6, 9], [3, 0, 0, 1, 4, -1, 10, 7, 4, 8], [2, 2, 0, -1, 7, 7, 3, 8, 3, 7], [2, -1, 4, 0, 0, -1, 10, 5, 10, 8], [7, 6, 5, 2, 0, 7, 4, 3, 3, 0], [7, 2, 7, 4, 1, 0, 4, 2, 9, 1], [-1, 3, 1, 0, 10, 1, 0, 0, 9, 5], [6, 2, 10, 8, 1, 0, 1, 0, 1, 3], [8, 8, 3, 4, 10, -1, 8, 3, 0, 8], [-1, 4, 8, 10, 1, 4, 6, 0, 4, 0]]
-    val = solve_graph(graph)
+    solve_graph(graph)

@@ -1,0 +1,21 @@
+[package]
+authors = ["aplet123"]
+description = "yes"
+edition = "2021"
+exclude = ["internal.node"]
+license = "MIT"
+name = "pyjs"
+version = "0.1.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+pyo3 = {version = "0.19.1", features = ["auto-initialize"]}
+
+[dependencies.neon]
+default-features = false
+features = ["napi-6"]
+version = "1.0.0-alpha.4"

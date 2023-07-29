@@ -1,0 +1,20 @@
+{
+  "name": "pyjs",
+  "version": "0.1.0",
+  "description": "yes",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc && cargo-cp-artifact -nc build/internal.node -- cargo build --message-format=json-render-diagnostics",
+    "build-debug": "npm run build --",
+    "build-release": "npm run build -- --release",
+    "install": "npm run build-release",
+    "test": "cargo test"
+  },
+  "author": "aplet123",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "cargo-cp-artifact": "^0.1",
+    "typescript": "^5.1.6"
+  }
+}
